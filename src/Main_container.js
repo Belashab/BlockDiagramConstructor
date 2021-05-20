@@ -1,5 +1,5 @@
 import React from 'react'
-import Upper_menu from 'Upper_menu.js'
+import Upper_menu from './Upper_menu'
 
 function Main_container (props) {
     return (
