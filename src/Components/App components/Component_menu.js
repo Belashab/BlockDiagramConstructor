@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+// import blocks from './blocks/blocks.json'
 
 function Component_menu(props) {
     return (
@@ -14,6 +15,15 @@ function Component_menu(props) {
 
 function component_block__dnd_handler (e) {
     console.log(`e.target.id` + 'clicked')
+}
+
+function component_block__getter (props) {
+    
+    return (
+        <div>
+            <ul><Component_block /></ul>
+        </div>
+    );
 }
 
 const Component_block = (props) => {
