@@ -18,8 +18,10 @@ function component_block__dnd_handler (e) {
 
 const Component_block = (props) => {
     return(
-    <div id = {props.id}></div>
+    <div id = {props.id}>{props.id}</div>
     );
 }
+
+
 
 export default Component_menu;
