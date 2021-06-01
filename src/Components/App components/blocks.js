@@ -1,5 +1,5 @@
-{
-    "blocks": [
+
+   let blocks = [
         {
             "id": 1
         },
@@ -10,5 +10,7 @@
             "id": 3
         }
     ]
-}
+
+export default blocks
+
 

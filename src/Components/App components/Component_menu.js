@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import blocks from './../Blocks/blocks.json'
+import blocks from './blocks.js'
 
 function Component_menu(props) {
     return (
@@ -9,6 +9,7 @@ function Component_menu(props) {
             <Component_block />
             <Component_block />
             <Component_block />
+            <component_block__getter />
         </div>
     );
 }
@@ -25,7 +26,7 @@ function component_block__getter (props) {
     
     return (
         <div>
-            <ul><Component_block /></ul>
+            {blocks.map(block => <div key={blocks.id}> {blocks.id} </div>)}
         </div>
     );
 }
