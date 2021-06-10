@@ -10,9 +10,14 @@
 .home,
 .reports,
 .products {
+  position: fixed;
+  padding: 5px;
   height: 90vh;
+  width: 70vw;
   align-items: center;
   justify-content: center;
+  z-index: 0;
+  left: 250px
   /* font-size: 3rem; */
 }
 

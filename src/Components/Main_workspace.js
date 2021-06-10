@@ -3,7 +3,9 @@ import Diagram, { createSchema, useSchema } from 'beautiful-react-diagrams';
 import './Main_workspace.css'
 import { Button } from 'beautiful-react-ui';
 
-
+function EditForm (props) {
+  
+}
 
 
 const initialSchema = createSchema({
@@ -18,10 +20,10 @@ const initialSchema = createSchema({
 });
 
 const CustomRender = ({ id, content, data, inputs, outputs }) => (
-    <div style={{background: 'purple'}}>
-      <div style={{textAlign: 'right'}}>
+    <div style={{background: 'yellow'}}>
+      {/* <div style={{textAlign: 'right'}}>
         <Button icon="times" size="small" onClick={()=>data.onClick(id)}/>
-      </div>
+      </div> */}
       <div role="button" style={{padding: '15px'}}>
         {content}
       </div>
@@ -33,13 +35,12 @@ const CustomRender = ({ id, content, data, inputs, outputs }) => (
 );
 
 const UncontrolledDiagram = () => {
-  // create diagrams schema
-  const [schema, { onChange, addNode, removeNode }] = useSchema(initialSchema);
+  const [schema, { onChange, addNode }] = useSchema(initialSchema);
   
-  const deleteNodeFromSchema = (id) => {
-    const nodeToRemove = schema.nodes.find(node => node.id === id);
-    removeNode(nodeToRemove);
-  };
+  // const deleteNodeFromSchema = (id) => {
+  //   const nodeToRemove = schema.nodes.find(node => node.id == id);
+  //   removeNode(nodeToRemove);
+  // };
 
   const addNewNode = () => {
     const nextNode = {
@@ -50,7 +51,6 @@ const UncontrolledDiagram = () => {
          schema.nodes[schema.nodes.length - 1].coordinates[1],
        ],
        render: CustomRender,
-       data: {onClick: deleteNodeFromSchema},
        inputs: [{ id: `port-${Math.random()}`}],
        outputs: [{ id: `port-${Math.random()}`}],
    };
