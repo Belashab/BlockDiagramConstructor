@@ -40,8 +40,8 @@ const initialSchema = createSchema({
   ]
 });
 
-const CustomRender = ({ id, content, data, inputs, outputs , background}) => (
-    <div style={{background: ` ' ${background} ' `}}>
+const CustomRender = ({ id, content, data, inputs, outputs, backgroundc}) => (
+    <div style={{background: `${backgroundc}`}}>
       {/* <div style={{textAlign: 'right'}}>
         <Button icon="times" size="small" onClick={()=>data.onClick(id)}/>
       </div> */}
@@ -76,10 +76,10 @@ const UncontrolledDiagram = (props) => {
          schema.nodes[schema.nodes.length - 1].coordinates[0] + 100,
          schema.nodes[schema.nodes.length - 1].coordinates[1],
        ],
-       background: `${backgroundcolor}`,
        render: CustomRender,
       inputs: [{ id: `port-${Math.random()}`}],
       outputs: [{ id: `port-${Math.random()}`}],
+      backgroundc: {backgroundcolor},
    };
    
    addNode(nextNode);
