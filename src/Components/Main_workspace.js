@@ -1,33 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import Diagram, { createSchema, useSchema } from 'beautiful-react-diagrams';
 import './Main_workspace.css'
 import { Button } from 'beautiful-react-ui';
-
-// function EditForm (props) {
-//   let [backgroundcolor, setbackgroundcolor] = useState("purple")
-//   function changeHandler (e) {
-//     setbackgroundcolor(backgroundcolor = e.target.value)
-//     console.log(backgroundcolor)
-//   }
-
-//   const current_background_color = useRef(backgroundcolor)
-
-//   return (
-//     <>
-//         <form>
-//             <label>
-//                 <select onChange = {changeHandler}>
-//                     <option value = "purple" >purple</option>
-//                     <option value = "yellow" >yellow</option>
-//                     <option value = "green" >green</option>
-//                     <option value = "blue" >blue</option>
-//                 </select>
-//             </label>
-//         </form>
-//     </>
-//   )
-// }
-
 
 const initialSchema = createSchema({
   nodes: [
@@ -42,13 +16,10 @@ const initialSchema = createSchema({
 
 const CustomRender = ({ id, content, data, inputs, outputs, backgroundc}) => (
     <div style={{background: `${backgroundc}`}}>
-      {/* <div style={{textAlign: 'right'}}>
-        <Button icon="times" size="small" onClick={()=>data.onClick(id)}/>
-      </div> */}
       <div role="button" style={{padding: '15px'}}>
         {content}
       </div>
-      <div style={{marginTop: '10px',display:'flex', justifyContent:'space-between'}}>
+      <div style={{marginTop: '10px', display:'flex', justifyContent:'space-between'}}>
         {inputs.map((port) => React.cloneElement(port, {style: { width: '25px', height: '25px', background: '#1B263B' }}))}
         {outputs.map((port) => React.cloneElement(port, {style: { width: '25px', height: '25px', background: '#1B263B' }}))}
       </div>
@@ -69,17 +40,17 @@ const UncontrolledDiagram = (props) => {
   // };
 
   const addNewNode = () => {
-    const nextNode = {
-       id: `node-${schema.nodes.length+1}`,
-       content: `Node ${schema.nodes.length+1}`,
-       coordinates: [
+    let nextNode = {
+        id: `${schema.nodes.length + 1}`,
+        content: `${(prompt("Enter Node Name", `Node ${schema.nodes.length + 1}`))}`,
+        coordinates: [
          schema.nodes[schema.nodes.length - 1].coordinates[0] + 100,
          schema.nodes[schema.nodes.length - 1].coordinates[1],
-       ],
-       render: CustomRender,
-      inputs: [{ id: `port-${Math.random()}`}],
-      outputs: [{ id: `port-${Math.random()}`}],
-      backgroundc: {backgroundcolor},
+        ],
+        render: CustomRender,
+        inputs: [{ id: `port-${Math.random()}`}],
+        outputs: [{ id: `port-${Math.random()}`}],
+        backgroundc: `${backgroundcolor}`
    };
    
    addNode(nextNode);
@@ -90,7 +61,7 @@ const UncontrolledDiagram = (props) => {
       <form>
           <label>
               <select onChange = {changeHandler}>
-                  <option value = "purple" >purple</option>
+                  <option value = 'purple' >purple</option>
                   <option value = "yellow" >yellow</option>
                   <option value = "green" >green</option>
                   <option value = "blue" >blue</option>
