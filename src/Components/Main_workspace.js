@@ -3,11 +3,16 @@ import Diagram, { createSchema, useSchema } from 'beautiful-react-diagrams';
 import './Main_workspace.css'
 import { Button } from 'beautiful-react-ui';
 
+
+
+
+
+
 const initialSchema = createSchema({
   nodes: [
     {
       id: 'node-1',
-      content: 'Node 1',
+      content: 'start',
       coordinates: [150, 60],
       outputs: [ { id: 'port-1', alignment: 'right' } ],
     },
@@ -29,9 +34,25 @@ const CustomRender = ({ id, content, data, inputs, outputs}) => (
 const UncontrolledDiagram = (props) => {
   const [schema, { onChange, addNode }] = useSchema(initialSchema);
   let [backgroundcolor, setbackgroundcolor] = useState("purple")
+  let [nodeName, setNodeName] = useState(`Unnamed node`)
   function changeHandler (e) {
     setbackgroundcolor(backgroundcolor = e.target.value)
     console.log(backgroundcolor)
+  }
+
+  function nodeNameInputHandler (e) {
+    setNodeName(e.target.value)
+  }
+
+  function NodeNameInput() {
+    return(
+    <form>
+      <label>
+        New Node Name:
+        <textarea value = {nodeName} onChange = {nodeNameInputHandler} />
+      </label>
+    </form>
+    );
   }
 
   // const deleteNodeFromSchema = (id) => {
@@ -42,17 +63,17 @@ const UncontrolledDiagram = (props) => {
   const addNewNode = () => {
     let nextNode = {
         id: `${schema.nodes.length + 1}`,
-        content: `${(prompt("Enter Node Name", `Node ${schema.nodes.length + 1}`))}`,
+        content: `${nodeName}`,
         coordinates: [
          schema.nodes[schema.nodes.length - 1].coordinates[0] + 100,
          schema.nodes[schema.nodes.length - 1].coordinates[1],
         ],
         render: CustomRender,
-        inputs: [{ id: `port-${Math.random()}`}],
+        inputs: [{ id: `port-${Math.random()}`, aligment: 'top'}],
         outputs: [{ id: `port-${Math.random()}`}],
         //В дату можно передать любую переменную, которая может понадобиться при рендере
         data: {
-          backroundc: backgroundcolor
+          backgroundc: backgroundcolor
         }
    };
    
@@ -61,8 +82,10 @@ const UncontrolledDiagram = (props) => {
 
   return (
     <>
+      <NodeNameInput />
       <form>
           <label>
+            New node colour:
               <select onChange = {changeHandler}>
                   <option value = 'purple' >purple</option>
                   <option value = "yellow" >yellow</option>
