@@ -11,7 +11,7 @@ import { Button } from 'beautiful-react-ui';
 const initialSchema = createSchema({
   nodes: [
     {
-      id: 'node-1',
+      id: 'node-0',
       content: 'start',
       coordinates: [150, 60],
       outputs: [ { id: 'port-1', alignment: 'right' } ],
