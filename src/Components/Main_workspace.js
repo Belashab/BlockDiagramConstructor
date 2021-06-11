@@ -14,8 +14,8 @@ const initialSchema = createSchema({
   ]
 });
 
-const CustomRender = ({ id, content, data, inputs, outputs, backgroundc}) => (
-    <div style={{background: `${backgroundc}`}}>
+const CustomRender = ({ id, content, data, inputs, outputs}) => (
+    <div style={{background: `${data.backgroundc}`}}>
       <div role="button" style={{padding: '15px'}}>
         {content}
       </div>
@@ -50,7 +50,10 @@ const UncontrolledDiagram = (props) => {
         render: CustomRender,
         inputs: [{ id: `port-${Math.random()}`}],
         outputs: [{ id: `port-${Math.random()}`}],
-        backgroundc: `${backgroundcolor}`
+        //В дату можно передать любую переменную, которая может понадобиться при рендере
+        data: {
+          backroundc: backgroundcolor
+        }
    };
    
    addNode(nextNode);
