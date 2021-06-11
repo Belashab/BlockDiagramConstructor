@@ -4,14 +4,10 @@ import './Main_workspace.css'
 import { Button } from 'beautiful-react-ui';
 
 
-
-
-
-
 const initialSchema = createSchema({
   nodes: [
     {
-      id: 'node-0',
+      id: 'node-1',
       content: 'start',
       coordinates: [150, 60],
       outputs: [ { id: 'port-1', alignment: 'right' } ],
@@ -19,8 +15,15 @@ const initialSchema = createSchema({
   ]
 });
 
+
+
+
+
 const CustomRender = ({ id, content, data, inputs, outputs}) => (
     <div style={{background: `${data.backgroundc}`}}>
+      {/* <div style={{textAlign: 'right'}}>
+        <Button icon="times" size="small" onClick={()=>data.onClick(id)}/>
+      </div> */}
       <div role="button" style={{padding: '15px'}}>
         {content}
       </div>
@@ -32,12 +35,21 @@ const CustomRender = ({ id, content, data, inputs, outputs}) => (
 );
 
 const UncontrolledDiagram = (props) => {
+  // + removeNode если его заставить работать как надо
   const [schema, { onChange, addNode }] = useSchema(initialSchema);
   let [backgroundcolor, setbackgroundcolor] = useState("grey")
   let [nodeName, setNodeName] = useState(`Unnamed node`)
+
+
+
   function changeHandler (e) {
     setbackgroundcolor(backgroundcolor = e.target.value)
   }
+
+  // function ResetSchema (e) {
+    
+  // }
+
 
 
 
@@ -53,24 +65,25 @@ const UncontrolledDiagram = (props) => {
   }
 
   // const deleteNodeFromSchema = (id) => {
-  //   const nodeToRemove = schema.nodes.find(node => node.id == id);
+  //   const nodeToRemove = schema.nodes.find(node => node.id === id);
   //   removeNode(nodeToRemove);
   // };
 
   const addNewNode = () => {
-    let nextNode = {
-        id: `${schema.nodes.length + 1}`,
+    const nextNode = {
+        id: `node-${schema.nodes.length + 1}`,
         content: `${nodeName}`,
         coordinates: [
-         schema.nodes[schema.nodes.length - 1].coordinates[0] + 100,
-         schema.nodes[schema.nodes.length - 1].coordinates[1],
+         150,
+         60,
         ],
         render: CustomRender,
         inputs: [{ id: `port-${Math.random()}`}],
         outputs: [{ id: `port-${Math.random()}`}],
         //В дату можно передать любую переменную, которая может понадобиться при рендере
         data: {
-          backgroundc: backgroundcolor
+          backgroundc: backgroundcolor,
+          // onClick: deleteNodeFromSchema
         }
    };
    
@@ -92,7 +105,7 @@ const UncontrolledDiagram = (props) => {
               </select>
           </label>
       </form>
-
+      {/* <button onClick = {resetSchema}>Reset schema</button> */}
       <div style={{ height: '80vh', width: '95vw', zindex: 0}}>
         <Button color="primary" icon="plus" onClick={addNewNode}>Add new node</Button>
         <Diagram schema={schema} onChange={onChange} />
