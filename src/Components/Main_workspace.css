@@ -1,3 +1,7 @@
 .Main_workspace {
     z-index: 0;
 }
+
+.textarea {
+    resize: none;
+}

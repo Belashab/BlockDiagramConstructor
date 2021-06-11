@@ -33,23 +33,20 @@ const CustomRender = ({ id, content, data, inputs, outputs}) => (
 
 const UncontrolledDiagram = (props) => {
   const [schema, { onChange, addNode }] = useSchema(initialSchema);
-  let [backgroundcolor, setbackgroundcolor] = useState("purple")
+  let [backgroundcolor, setbackgroundcolor] = useState("grey")
   let [nodeName, setNodeName] = useState(`Unnamed node`)
   function changeHandler (e) {
     setbackgroundcolor(backgroundcolor = e.target.value)
-    console.log(backgroundcolor)
   }
 
-  function nodeNameInputHandler (e) {
-    setNodeName(e.target.value)
-  }
+
 
   function NodeNameInput() {
     return(
     <form>
       <label>
         New Node Name:
-        <textarea value = {nodeName} onChange = {nodeNameInputHandler} />
+        <input value = {nodeName} onChange = {e => setNodeName(e.target.value)} className = "textarea" autoFocus/>
       </label>
     </form>
     );
@@ -69,7 +66,7 @@ const UncontrolledDiagram = (props) => {
          schema.nodes[schema.nodes.length - 1].coordinates[1],
         ],
         render: CustomRender,
-        inputs: [{ id: `port-${Math.random()}`, aligment: 'top'}],
+        inputs: [{ id: `port-${Math.random()}`}],
         outputs: [{ id: `port-${Math.random()}`}],
         //В дату можно передать любую переменную, которая может понадобиться при рендере
         data: {
@@ -87,6 +84,7 @@ const UncontrolledDiagram = (props) => {
           <label>
             New node colour:
               <select onChange = {changeHandler}>
+                  <option value = "grey" >grey</option>
                   <option value = 'purple' >purple</option>
                   <option value = "yellow" >yellow</option>
                   <option value = "green" >green</option>
@@ -95,7 +93,7 @@ const UncontrolledDiagram = (props) => {
           </label>
       </form>
 
-      <div style={{ height: '22.5rem' }}>
+      <div style={{ height: '80vh', width: '95vw', zindex: 0}}>
         <Button color="primary" icon="plus" onClick={addNewNode}>Add new node</Button>
         <Diagram schema={schema} onChange={onChange} />
       </div>
