@@ -1,6 +1,8 @@
 
-Created wit libraries beautiful-react-diagrams and it's dependencies and react-router-dom.
+Created with libraries beautiful-react-diagrams and it's dependencies and react-router-dom.
 
+
+In order to app to work needed beautiful-react-diagrams from this repo.
 
 # Getting Started with Create React App
 
